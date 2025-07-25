@@ -1,3 +1,19 @@
-spam {
+/* Un elemento puede tener la misma clase a diferencia de 
+de un ID  */
+
+li {
+    color: blue;
+}
+.faltante {
     color:red
     } 
+.tenemos {
+    color:green
+} 
+
+/* Este es un comentario en CSS */
+/* Ahora escribimos un ID # , solo se puede usar una vez*/
+/* una mala practica es usarlo para todo # */
+
+#
+
