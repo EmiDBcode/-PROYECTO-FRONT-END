@@ -17,8 +17,12 @@ p {
     
 }
 
+button {
+    letter-spacing: : 2px;
+}
+
 span {
-    
+
     text-decoration:line-through;
 
 }
