@@ -11,11 +11,14 @@ p {
     /* poner en negrita algo */
     font-weight:600;
     /* definimos como queremos la letra */
-    font-style: oblique;
-
-
-
-
+    font-style: oblique ;
+    /* define la alineacion entre renglones */
+    text-align: justify  ;
+    
 }
 
+span {
+    
+    text-decoration:line-through;
 
+}
