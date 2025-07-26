@@ -4,10 +4,10 @@ de un ID  */
 li {
     color: blue;
 }
-.faltante {
+.ingrediente_faltante {
     color:red
     } 
-.tenemos {
+.ingrediente_que_tenemos{
     color:green
 } 
 
@@ -15,5 +15,8 @@ li {
 /* Ahora escribimos un ID # , solo se puede usar una vez*/
 /* una mala practica es usarlo para todo # */
 
-#
+#Ingrediente_secreto {
+    color:brown
+}
+
 

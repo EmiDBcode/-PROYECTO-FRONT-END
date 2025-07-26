@@ -1,0 +1,21 @@
+
+p {
+    /*Con esto modificamos el color*/
+    color: red;
+    /* font-famili nos sirve para cmabiar la tipografia */
+    /* con coma se puede poner otra tipografia, se puede usar como tipografia de respaldo, por si la primera no la toma por x motivo se toma la que sigue*/
+
+    font-family: sans-serif;
+    /* define tamaño */
+    font-size: 13px;
+    /* poner en negrita algo */
+    font-weight:600;
+    /* definimos como queremos la letra */
+    font-style: oblique;
+
+
+
+
+}
+
+
