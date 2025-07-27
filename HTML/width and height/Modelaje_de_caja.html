@@ -1,0 +1,51 @@
+/* ------------------------------------------------------------
+        💡 Modelo de Caja en HTML (Box Model)
+
+    Cada elemento en HTML se representa como una "caja" compuesta por:
+
+    1️⃣ Content (contenido): 
+        - El texto, imagen o lo que contiene el elemento.
+        - Tamaño definido con width y height.
+
+    2️⃣ Padding (relleno):
+        - Espacio entre el contenido y el borde.
+        - Aumenta el tamaño visible del elemento SIN afectar el tamaño del borde.
+
+    3️⃣ Border (borde):
+        - Línea que rodea al padding y al contenido.
+        - Puede tener grosor, color, estilo (solid, dashed, etc.).
+
+    4️⃣ Margin (margen):
+        - Espacio externo entre la caja y otras cajas.
+        - No tiene color, es totalmente transparente.
+
+    📐 Visualización:
+
+        +-------------------------------+
+        |           Margin              |
+        |  +------------------------+   |
+        |  |        Border          |   |
+        |  |  +------------------+  |   |
+        |  |  |     Padding      |  |   |
+        |  |  |  +------------+  |  |   |
+        |  |  |  |  Content   |  |  |   |
+        |  |  |  +------------+  |  |   |
+        |  |  +------------------+  |   |
+        |  +------------------------+   |
+        +-------------------------------+
+
+    🛠️ Propiedades comunes en CSS:
+        - margin, padding, border
+        - box-sizing: border-box (incluye padding y border en width/height)
+
+    Ejemplo:
+
+    div {
+        width: 200px;
+        padding: 10px;
+        border: 2px solid black;
+        margin: 20px;
+        box-sizing: border-box;
+    }
+
+------------------------------------------------------------ */
