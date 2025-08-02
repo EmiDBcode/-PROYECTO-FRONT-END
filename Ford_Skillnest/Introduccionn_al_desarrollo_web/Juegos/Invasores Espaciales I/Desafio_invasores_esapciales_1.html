@@ -1,0 +1,200 @@
+<!--Desafío Invasores Espaciales
+(Básico) Permite que la nave se mueva hacia arriba y hacia abajo
+(Básico) Agrega más aliens (agrega 4 aliens más en el espacio)
+(Intermedio) Cambia el fondo (usa otro color o utiliza imágenes propias)
+(Intermedio) Cambia la nave (busca alguna imagen que te guste)
+(Intermedio) Cambia los aliens (busca alguna imagen que te guste)
+(Avanzado) Limita el rango en que puede subir y bajar; que la nave solamente pueda subir ⅓ de la pantalla
+(Avanzado) Evita que la nave se salga del espacio, es decir limita el rango del lado izquierdo y derecho
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invasores Espaciales</title>
+</head>
+<body>
+    <style type="text/css">
+        #espacio {
+            background-image: url("espacio3.jpg");
+            width: 900px;
+            height: 700px;
+        }
+        .nave {
+            position: absolute;
+            background-image: url("nave1.png");
+            width: 70px;
+            height: 80px;
+        }
+        .alien {
+            position: absolute;
+            background-image: url("alien.png");
+            width: 70px;
+            height: 75px;
+        }
+    </style>
+    <div id="espacio">
+        <div id="naves"></div>
+        <div id="aliens"></div>
+    </div>
+
+    <script type="text/javascript">
+        var nave = {
+            left: 450,
+            top: 620
+        };
+
+        var aliens = [
+            {left: 350, top: 200},
+            {left: 450, top: 175},
+            {left: 150, top: 300},
+            {left: 750, top: 175},
+            {left:  50, top:  50},
+            {left: 600, top: 400},
+        ]
+
+        function dibujaNave(){
+            contenido = "<div class='nave' style='left:"+nave.left+"px; top:"+nave.top+"px'></div>";
+            document.getElementById("naves").innerHTML = contenido;
+        }
+        
+        function dibujaAliens(){
+            contenido = "";
+            console.log(aliens);
+            for(var x = 0; x <aliens.length; x ++){
+                    contenido += "<div class='alien' style='left:"+aliens[x].left+"px; top:"+aliens[x].top+"px'></div>";
+
+            }
+            document.getElementById("aliens").innerHTML = contenido;
+        }
+        
+        dibujaNave();
+        dibujaAliens();
+
+        document.onkeydown = function(e){
+            console.log(e);
+            if(e.keyCode === 37 && nave.left > -10){ //Izquierda
+                nave.left -= 10;
+            }
+
+            if(e.keyCode === 39 && nave.left < 800){ //Derecha
+                nave.left += 10;
+            }
+
+            if(e.keyCode === 38 && nave.top > 450){ //Arriba
+                nave.top -= 10;
+            }
+            
+            if(e.keyCode === 40 && nave.top < 620){ //Abajo
+                nave.top += 10;
+                console.log(nave.top)
+            }
+            
+
+            dibujaNave();
+        }
+
+    </script>
+
+</body>
+</html>
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Desafío Invasores Espaciales</title>
+    <style>
+    /* Fondo del juego */
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-image: url("img-invasores-espaciales/espacio3.jpg");
+        background-size: cover;
+    }
+
+    /* Nave */
+    #nave {
+        position: absolute;
+        left: 100px;
+        top: 100px;
+        width: 70px;
+    }
+
+    /* Aliens */
+    .alien {
+        position: absolute;
+        width: 60px;
+    }
+    </style>
+</head>
+<body>
+
+    <!--  Imagen de la nave -->
+    <img id="nave" src="img-invasores-espaciales/nave1.png" alt="nave">
+
+    <!-- Aliens posicionados manualmente -->
+    <img class="alien" src="img-invasores-espaciales/alien.png" alt="alien" style="top: 50px; left: 800px;">
+    <img class="alien" src="img-invasores-espaciales/alien.png" alt="alien" style="top: 150px; left: 850px;">
+    <img class="alien" src="img-invasores-espaciales/alien.png" alt="alien" style="top: 250px; left: 900px;">
+    <img class="alien" src="img-invasores-espaciales/alien.png" alt="alien" style="top: 350px; left: 950px;">
+    <img class="alien" src="img-invasores-espaciales/alien.png" alt="alien" style="top: 450px; left: 1000px;">
+
+    <!-- Lógica de movimiento -->
+    <script>
+        const nave = document.getElementById("nave");
+
+        // Movimiento de la nave con flechas del teclado
+        document.addEventListener("keydown", function(event) {
+        const paso = 20; // 🧍 Movimiento en píxeles
+        const limiteSuperior = window.innerHeight / 3; // 🟨 Solo puede subir ⅓ de pantalla
+        const limiteInferior = window.innerHeight - nave.offsetHeight;
+        const limiteIzq = 0;
+        const limiteDer = window.innerWidth - nave.offsetWidth;
+
+        let top = parseInt(window.getComputedStyle(nave).top);
+        let left = parseInt(window.getComputedStyle(nave).left);
+
+        if (event.key === "ArrowUp") {
+            if (top - paso >= limiteSuperior) {
+            nave.style.top = (top - paso) + "px";
+            }
+        }
+
+        if (event.key === "ArrowDown") {
+            if (top + paso <= limiteInferior) {
+            nave.style.top = (top + paso) + "px";
+            }
+        }
+
+        if (event.key === "ArrowLeft") {
+            if (left - paso >= limiteIzq) {
+            nave.style.left = (left - paso) + "px";
+            }
+        }
+
+        if (event.key === "ArrowRight") {
+            if (left + paso <= limiteDer) {
+            nave.style.left = (left + paso) + "px";
+            }
+        }
+        });
+    </script>
+
+    <!-- 
+    =========================================================
+         FUNCIONALIDADES INCLUIDAS:
+    =========================================================
+    1. (Básico) Movimiento de la nave hacia arriba y abajo
+    2. (Básico) Se agregaron 5 aliens
+    3. (Intermedio) Se cambió el fondo a una imagen personalizada
+    4. (Intermedio) Se usó imagen personalizada para la nave
+    5. (Intermedio) Se usó imagen personalizada para los aliens
+    6. (Avanzado) Se limitó el rango para que la nave solo suba ⅓ de la pantalla
+    7. (Avanzado) Se limitó el rango horizontal para que no salga del espacio
+    =========================================================
+    -->
+
+</body>
+</html>
