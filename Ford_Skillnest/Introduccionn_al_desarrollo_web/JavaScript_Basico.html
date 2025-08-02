@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo Básico de JavaScript</title>
+</head>
+<body>
+
+    <!-- Contenido visible en el navegador -->
+    <h1>Ejemplo Básico de JavaScript</h1>
+    <p>Revisá la consola para ver los resultados.</p>
+
+    <script>
+    // ----------------------------
+    // DECLARACIÓN DE VARIABLES
+    // ----------------------------
+    var a = 20;                    // Variable numérica
+    var b = "Mundo";              // Variable de tipo texto (string)
+
+    // Arreglos (Arrays)
+    var a_array = [2, 4, 6, 8];    // Array de números
+    var b_array = ["¡Programar", "es", "genial!"]; // Array de strings
+
+    // ----------------------------
+    // SALIDA EN EL DOCUMENTO
+    // ----------------------------
+
+    // Escribe directamente en la página HTML
+    document.write("Hola");              // Aparece: Hola
+    document.write(" Hola ", b);         // Aparece: Hola Mundo
+
+    // ----------------------------
+    // SALIDA EN LA CONSOLA (developer tools)
+    // ----------------------------
+
+    console.log(a);                      // Muestra: 20
+    console.log(b);                      // Muestra: "Mundo"
+    console.log(b_array[2]);             // Muestra: "genial!" (índice 2 del array)
+
+    // ----------------------------
+    // BUCLE FOR del 0 al 49
+    // ----------------------------
+
+    for (var x = 0; x < 50; x++) {
+      console.log(x);                   // Imprime cada número del 0 al 49
+    }
+
+    // ----------------------------
+    // BUCLE FOR del 1 al 50 (número par o impar)
+    // ----------------------------
+
+    for (var y = 1; y <= 50; y++) {
+        if (y % 2 === 0) {
+        console.log(y, 'es un número Par');
+        } else {
+        console.log(y, 'es un número Impar');
+        }
+    }
+
+    // ----------------------------
+    // FUNCIÓN PARA SUMAR DOS NÚMEROS
+    // ----------------------------
+
+    function sumatoria(num1, num2) {
+        console.log('Recibí los siguientes parámetros:', num1, num2);
+      return num1 + num2;              // Devuelve la suma de ambos números
+    }
+
+    // Llamadas a la función sumatoria
+    console.log(sumatoria(10, 5));                     // Muestra: 15
+    console.log(sumatoria(3, 4) + sumatoria(4, 3));    // Muestra: 14 (7 + 7)
+
+    </script>
+
+</body>
+</html>
