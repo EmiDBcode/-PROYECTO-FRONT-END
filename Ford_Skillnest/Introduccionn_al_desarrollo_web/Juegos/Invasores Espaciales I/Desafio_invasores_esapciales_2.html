@@ -1,0 +1,303 @@
+<!--
+
+Desafío Invasores Espaciales II
+(Básico) Cambia el color de los disparos
+(Intermedio) Haz que los aliens se muevan más rápido
+(Intermedio) Haz que los disparos se muevan más rápido
+(Avanzado) Haz que el juego se vea más fluido (Sugerencia: la velocidad del ciclo del juego)
+(Avanzado) No dejes que los aliens sobrepasen el espacio.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invasores Espaciales</title>
+</head>
+<body>
+    <style type="text/css">
+        #espacio {
+            background-image: url("espacio3.jpg");
+            width: 900px;
+            height: 700px;
+        }
+        .nave {
+            position: absolute;
+            background-image: url("nave1.png");
+            width: 70px;
+            height: 80px;
+        }
+        .alien {
+            position: absolute;
+            background-image: url("alien.png");
+            width: 70px;
+            height: 75px;
+        }
+        .disparo {
+            position: absolute;
+            background-color: red;
+            width: 2px;
+            height: 10px;
+            position: absolute;
+        }
+    </style>
+    <div id="espacio">
+        <div id="naves"></div>
+        <div id="aliens"></div>
+        <div id="disparos"></div>
+    </div>
+
+    <script type="text/javascript">
+        var nave = {
+            left: 450,
+            top: 620
+        };
+
+        var aliens = [
+            {left: 350, top: 200},
+            {left: 450, top: 175},
+            {left: 150, top: 300},
+            {left: 750, top: 175},
+            {left:  50, top:  50},
+            {left: 600, top: 400},
+        ];
+
+        var disparos = [];
+
+        function dibujaNave(){
+            contenido = "<div class='nave' style='left:"+nave.left+"px; top:"+nave.top+"px'></div>";
+            document.getElementById("naves").innerHTML = contenido;
+        }
+        
+        function dibujaAliens(){
+            contenido = "";
+            console.log(aliens);
+            for(var x = 0; x <aliens.length; x ++){
+                    contenido += "<div class='alien' style='left:"+aliens[x].left+"px; top:"+aliens[x].top+"px'></div>";
+
+            }
+            document.getElementById("aliens").innerHTML = contenido;
+        }
+
+        function dibujaDisparos(){
+            contenido = "";
+            for(var x =0; x<disparos.length; x++){
+                contenido+=                        "<div class = 'disparo' style='left: "+disparos[x].left+"px; top: "+disparos[x].top+"px'></div>"
+            }
+            document.getElementById("disparos").innerHTML = contenido;
+        }
+
+        function moverAliens(){
+            for(var x = 0; x < aliens.length; x ++){
+                if(aliens[x].top < 620) {
+                    aliens[x].top = aliens[x].top + 10; 
+                }
+               
+            }
+        }
+
+        function moverDisparos(){
+            for(var x = 0; x < disparos.length; x ++){
+                disparos[x].top = disparos[x].top - 10; 
+            }
+        }
+
+        document.onkeydown = function(e){
+            console.log(e);
+            if(e.keyCode === 37 && nave.left > -10){ //Izquierda
+                nave.left -= 10;
+            }
+
+            if(e.keyCode === 39 && nave.left < 800){ //Derecha
+                nave.left += 10;
+            }
+
+            if(e.keyCode === 38 && nave.top > 450){ //Arriba
+                nave.top -= 10;
+            }
+            
+            if(e.keyCode === 40 && nave.top < 620){ //Abajo
+                nave.top += 10;
+                console.log(nave.top)
+            }
+            
+            if(e.keyCode === 32){ //Disparo
+                disparos.push({left: (nave.left+34), top: (nave.top-8)});
+                dibujaDisparos();
+            }
+
+
+            dibujaNave();
+        }
+
+        function cicloJuego() {
+            dibujaNave();
+
+            moverAliens();
+            dibujaAliens();
+
+            moverDisparos();
+            dibujaDisparos();
+
+            setTimeout(cicloJuego, 500)
+        }
+
+        cicloJuego();
+
+    </script>
+
+</body>
+</html>
+
+-->
+
+<!--
+    Desafío Invasores Espaciales II
+    (Básico) Cambia el color de los disparos
+    (Básico) Haz que los aliens se muevan más rápido
+    (Intermedio) Haz que los disparos se muevan más rápido
+    (Avanzado) Haz que el juego se vea más fluido (se bajó el tiempo del ciclo de juego)
+    (Avanzado) No dejes que los aliens sobrepasen el espacio
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invasores Espaciales</title>
+    <style type="text/css">
+        /* Fondo del espacio con imagen */
+        #espacio {
+            background-image: url("img-invasores-espaciales/espacio3.jpg");
+            width: 900px;
+            height: 700px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilo de la nave */
+        .nave {
+            position: absolute;
+            background-image: url("img-invasores-espaciales/nave1.png");
+            width: 70px;
+            height: 80px;
+        }
+
+        /* Estilo de los aliens */
+        .alien {
+            position: absolute;
+            background-image: url("img-invasores-espaciales/alien.png");
+            width: 70px;
+            height: 75px;
+        }
+
+        /* Estilo de los disparos */
+        .disparo {
+            position: absolute;
+            background-color: red; /* (Básico) Se puede cambiar a otro color si querés */
+            width: 2px;
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor principal del juego -->
+    <div id="espacio">
+        <div id="naves"></div>
+        <div id="aliens"></div>
+        <div id="disparos"></div>
+    </div>
+
+    <script type="text/javascript">
+        // Posición inicial de la nave
+        var nave = {
+            left: 450,
+            top: 620
+        };
+
+        // Lista de aliens con sus posiciones
+        var aliens = [
+            {left: 350, top: 200},
+            {left: 450, top: 175},
+            {left: 150, top: 300},
+            {left: 750, top: 175},
+            {left:  50, top:  50},
+            {left: 600, top: 400}
+        ];
+
+        // Lista de disparos
+        var disparos = [];
+
+        // Dibuja la nave
+        function dibujaNave(){
+            let contenido = "<div class='nave' style='left:"+nave.left+"px; top:"+nave.top+"px'></div>";
+            document.getElementById("naves").innerHTML = contenido;
+        }
+
+        // Dibuja los aliens
+        function dibujaAliens(){
+            let contenido = "";
+            for(var x = 0; x < aliens.length; x++){
+                contenido += "<div class='alien' style='left:"+aliens[x].left+"px; top:"+aliens[x].top+"px'></div>";
+            }
+            document.getElementById("aliens").innerHTML = contenido;
+        }
+
+        // Dibuja los disparos
+        function dibujaDisparos(){
+            let contenido = "";
+            for(var x = 0; x < disparos.length; x++){
+                contenido += "<div class='disparo' style='left:"+disparos[x].left+"px; top:"+disparos[x].top+"px'></div>";
+            }
+            document.getElementById("disparos").innerHTML = contenido;
+        }
+
+        // Mueve los aliens hacia abajo
+        function moverAliens(){
+            for(var x = 0; x < aliens.length; x++){
+                if(aliens[x].top < 620){ // (Avanzado) No dejamos que bajen más de eso
+                    aliens[x].top += 15;  // (Básico) Aumentamos velocidad
+                }
+            }
+        }
+
+        // Mueve los disparos hacia arriba
+        function moverDisparos(){
+            for(var x = 0; x < disparos.length; x++){
+                disparos[x].top -= 15; // (Intermedio) Aumentamos velocidad del disparo
+            }
+        }
+
+        // Control del teclado
+        document.onkeydown = function(e){
+            if(e.keyCode === 37 && nave.left > 0){ // Flecha izquierda
+                nave.left -= 10;
+            }
+            if(e.keyCode === 39 && nave.left < 830){ // Flecha derecha
+                nave.left += 10;
+            }
+            if(e.keyCode === 38 && nave.top > 450){ // Flecha arriba (limitado)
+                nave.top -= 10;
+            }
+            if(e.keyCode === 40 && nave.top < 620){ // Flecha abajo (limitado)
+                nave.top += 10;
+            }
+            if(e.keyCode === 32){ // Barra espaciadora para disparar
+                disparos.push({left: nave.left + 34, top: nave.top - 8});
+            }
+            dibujaNave();
+        }
+
+        // Bucle principal del juego
+        function cicloJuego() {
+            dibujaNave();
+            moverAliens();
+            dibujaAliens();
+            moverDisparos();
+            dibujaDisparos();
+            setTimeout(cicloJuego, 100); // (Avanzado) Velocidad del juego más fluida
+        }
+
+        // Iniciar juego
+        cicloJuego();
+    </script>
+</body>
+</html>
