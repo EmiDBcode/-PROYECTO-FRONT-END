@@ -1,6 +1,4 @@
 
-
-
 // Esta función determina si un usuario puede obtener su licencia de conducir
 function puedotenerlicencia (edadUsuario){
     // Verificamos si la edad es mayor a 17
