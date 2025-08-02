@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pac-Cat Dinámico</title>
+    <style>
+        /* Estilo base para que no haya márgenes ni espacios raros */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Cada fila del mundo ocupa su propia línea */
+        .fila {
+            line-height: 0;
+        }
+
+        /* Cuadrado morado: representa la pared */
+        .pared {
+            background-color: purple;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+        }
+
+        /* Cuadrado con hamburguesa */
+        .burguer {
+            background-color: black;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            background-image: url('img-pac-cat/burguer.png'); /* RUTA CORREGIDA */
+            background-size: contain;
+        }
+
+        /* Cuadrado negro vacío, donde el gato puede moverse */
+        .blank {
+            background-color: black;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+        }
+
+        /* Gato animado que se mueve */
+        #gato {
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            background-image: url('img-pac-cat/gato.gif'); /* RUTA CORREGIDA */
+            background-size: contain;
+            display: inline-block;
+            position: absolute; /* Lo posicionamos en píxeles */
+            left: 40px;
+            top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor donde se dibuja el mundo -->
+    <div id="mundo"></div>
+
+    <!-- Gato que se mueve sobre el mundo -->
+    <div id="gato"></div>
+
+    <script>
+        // 0 = espacio vacío (black)
+        // 1 = pared (purple)
+        // 2 = hamburguesa
+        let mundo = [
+            [1, 1, 1, 1, 1],
+            [1, 0, 2, 2, 1],
+            [1, 2, 1, 2, 1],
+            [1, 2, 2, 2, 1],
+            [1, 0, 2, 2, 1],
+            [1, 2, 1, 2, 1],
+            [1, 2, 2, 2, 1],
+            [1, 1, 1, 1, 1]
+        ];
+
+        // Diccionario para traducir números a clases CSS
+        const diccionario = {
+            0: "blank",
+            1: "pared",
+            2: "burguer"
+        };
+
+        // Dibuja el mundo en el HTML
+        function dibujarMundo() {
+            let salida = "";
+            for (let fila = 0; fila < mundo.length; fila++) {
+                salida += "<div class='fila'>";
+                for (let col = 0; col < mundo[fila].length; col++) {
+                    salida += `<div class='${diccionario[mundo[fila][col]]}'></div>`;
+                }
+                salida += "</div>";
+            }
+            document.getElementById("mundo").innerHTML = salida;
+        }
+
+        // Posición del gato al comenzar
+        let gato = {
+            x: 1,
+            y: 5
+        };
+
+        // Dibuja al gato en la pantalla
+        function dibujarGato() {
+            document.getElementById("gato").style.left = gato.x * 40 + "px";
+            document.getElementById("gato").style.top = gato.y * 40 + "px";
+        }
+
+        // Manejamos el teclado para mover al gato
+        document.onkeydown = function(e) {
+            if (e.keyCode === 37 && mundo[gato.y][gato.x - 1] !== 1) { // izquierda
+                gato.x--;
+            } else if (e.keyCode === 38 && mundo[gato.y - 1][gato.x] !== 1) { // arriba
+                gato.y--;
+            } else if (e.keyCode === 39 && mundo[gato.y][gato.x + 1] !== 1) { // derecha
+                gato.x++;
+            } else if (e.keyCode === 40 && mundo[gato.y + 1][gato.x] !== 1) { // abajo
+                gato.y++;
+            }
+
+            // Si pisamos una hamburguesa, la comemos (la volvemos espacio vacío)
+            mundo[gato.y][gato.x] = 0;
+
+            // Redibujamos mundo y gato
+            dibujarMundo();
+            dibujarGato();
+        };
+
+        // Inicializamos el juego
+        dibujarMundo();
+        dibujarGato();
+    </script>
+</body>
+</html>
