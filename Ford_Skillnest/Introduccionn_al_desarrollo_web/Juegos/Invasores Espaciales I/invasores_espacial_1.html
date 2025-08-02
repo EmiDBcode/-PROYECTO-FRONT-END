@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invasores Espaciales</title>
+</head>
+<body>
+    <style type="text/css">
+        #espacio {
+            background-image: url("espacio3.jpg");
+            width: 900px;
+            height: 700px;
+        }
+        .nave {
+            position: absolute;
+            background-image: url("nave1.png");
+            width: 70px;
+            height: 80px;
+        }
+        .alien {
+            position: absolute;
+            background-image: url("alien.png");
+            width: 70px;
+            height: 75px;
+        }
+    </style>
+    <div id="espacio">
+        <div id="naves"></div>
+        <div id="aliens"></div>
+    </div>
+
+    <script type="text/javascript">
+        var nave = {
+            left: 450,
+            top: 620
+        };
+
+        var aliens = [
+            {left: 350, top: 200},
+            {left: 450, top: 175},
+        ]
+
+        function dibujaNave(){
+            contenido = "<div class='nave' style='left:"+nave.left+"px; top:"+nave.top+"px'></div>";
+            document.getElementById("naves").innerHTML = contenido;
+        }
+        
+        function dibujaAliens(){
+            contenido = "";
+            console.log(aliens);
+            for(var x = 0; x <aliens.length; x ++){
+                    contenido += "<div class='alien' style='left:"+aliens[x].left+"px; top:"+aliens[x].top+"px'></div>";
+
+            }
+            document.getElementById("aliens").innerHTML = contenido;
+        }
+        
+        dibujaNave();
+        dibujaAliens();
+
+        document.onkeydown = function(e){
+            console.log(e);
+            if(e.keyCode === 37){ //Izquierda
+                nave.left -= 10;
+            }
+            if(e.keyCode === 39){ //Derecha
+                nave.left += 10;
+            }
+
+            dibujaNave();
+        }
+
+    </script>
+
+</body>
+</html>
