@@ -1,52 +1,47 @@
 // ========================
-// Ejemplo 1: funcion basica con return
+// Teoria sobre el uso de return en JavaScript
 // ========================
 
-// En JavaScript, igual que en Python, una funcion puede devolver un valor usando la palabra clave "return"
-// Esto permite que el resultado pueda ser almacenado o utilizado por otras partes del programa.
+// console.log permite a los desarrolladores visualizar lo que esta pasando en el codigo,
+// pero su funcionalidad termina ahi. Solo imprime en consola.
+// En cambio, return devuelve informacion al invocar una funcion y finaliza la ejecucion de esa funcion.
+
+// Si una funcion fuera una pasteleria, console.log seria como decir que el pastel esta listo,
+// mientras que return es lo que entrega el pastel para usarlo en otra parte del programa.
+
+// ========================
+// Ejemplo 1: return sin console.log
+// ========================
+
+function crearArreglo() {
+    var nuevoArreglo = ["a", "e", "i", "o", "u"];
+    return nuevoArreglo;
+}
+
+var vocales = crearArreglo(); // vocales ahora contiene el arreglo devuelto por la funcion
+
+// ========================
+// Ejemplo 2: funcion basica que devuelve un valor numerico
+// ========================
 
 function obtenerEdad() {
     var edad = 20;
-
-  // El valor de la variable 'edad' se devuelve al lugar donde se llama la funcion.
-  // Equivalente en Python:
-  // def obtener_edad():
-  //     edad = 20
-  //     return edad
     return edad;
 }
 
 // ========================
-// Ejemplo 2: funcion con parametros y return
+// Ejemplo 3: funcion con parametros
 // ========================
 
-// Esta funcion recibe dos parametros: largo y ancho.
-// Luego, calcula el area multiplicando ambos valores y lo devuelve con "return".
-// Es muy parecido a una funcion en Python que calcule area.
-
 function calculaAreaRectangulo(largo, ancho) {
-  var area = largo * ancho;
-
-  // Devuelve el resultado de la multiplicacion.
-  // Equivalente en Python:
-  // def calcula_area_rectangulo(largo, ancho):
-  //     area = largo * ancho
-  //     return area
+    var area = largo * ancho;
     return area;
 }
 
-// ========================
-// Ejemplo de uso
-// ========================
-
-// Llamamos a la funcion con los valores 10 y 20.
-// Aunque no usamos console.log() en esta linea, la funcion retorna el resultado.
-// Para verlo en pantalla deberiamos hacer:
-console.log(calculaAreaRectangulo(10, 20)); // Imprime: 200
+console.log(calculaAreaRectangulo(10, 20)); // Imprime 200
 
 // ========================
 // Comentario adicional:
 // ========================
-// En ambos lenguajes (Python y JavaScript):
-// - La palabra clave 'return' termina la funcion y envia un valor de vuelta.
-// - Si no se usa 'return', la funcion no devuelve nada (o devuelve undefined en JS y None en Python).
+// - En JavaScript y Python, 'return' termina la funcion y devuelve un valor.
+// - Si no se usa return, la funcion devuelve undefined (JS) o None (Python).
