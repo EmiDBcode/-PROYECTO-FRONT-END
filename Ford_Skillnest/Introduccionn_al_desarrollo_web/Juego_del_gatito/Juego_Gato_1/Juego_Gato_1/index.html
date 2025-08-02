@@ -1,3 +1,5 @@
+<!--
+--------- Codigo original ----------------------
 <html>
 <body>
 	<div id='background'>
@@ -28,3 +30,91 @@
     </script>
 </body>
 </html>
+
+-------------------------------------------------------------
+-->
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- Este div representa el fondo del juego -->
+<div id="background">
+
+    <!-- Este div es el personaje: un gatito -->
+    <!-- Tiene una imagen de fondo y una posicion absoluta -->
+    <div id="gatito"
+         style="position:absolute;
+                top:100px;
+                left:550px;
+                background: url('img/abajo1.png') no-repeat;
+                width:60px;
+                height:50px;
+                background-size: contain;">
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    // Estas variables guardan la posicion del gato
+    var posicionIzq = 550;
+    var posicionArriba = 100;
+
+    // Esta funcion actualiza la posicion del gato en la pantalla
+    function actualizar(){
+        // Se cambia la posicion izquierda
+        document.getElementById("gatito").style.left = posicionIzq + "px";
+
+        // Se cambia la posicion arriba
+        document.getElementById("gatito").style.top = posicionArriba + "px";
+    }
+
+    // Esta funcion se ejecuta cuando el usuario presiona una tecla
+    document.onkeydown = function(e){
+        
+        // Muestra informacion en la consola sobre la tecla presionada
+        console.log(e);
+
+        // Movimiento a la izquierda (flecha izquierda)
+        if(e.keyCode == 37){
+            // Verifica que no se salga de la pantalla
+            if(posicionIzq > 0){
+                posicionIzq = posicionIzq - 10;
+            }
+        }
+
+        // Movimiento a la derecha (flecha derecha)
+        else if(e.keyCode == 39){
+            // Verifica que no pase del limite derecho
+            if(posicionIzq < 800){
+                posicionIzq = posicionIzq + 10;
+            }
+        }
+
+        // Movimiento hacia abajo (flecha abajo)
+        else if(e.keyCode == 40){
+            // Verifica que no pase del limite inferior
+            if(posicionArriba < 800){
+                posicionArriba = posicionArriba + 10;
+            }
+        }
+
+        // Movimiento hacia arriba (flecha arriba)
+        else if(e.keyCode == 38){
+            // Verifica que no se vaya por arriba
+            if(posicionArriba > 0){
+                posicionArriba = posicionArriba - 10;
+            }
+        }
+
+        // Luego de modificar la posicion, se actualiza el personaje
+        actualizar();
+    }
+
+</script>
+
+</body>
+</html>
+
